@@ -9,10 +9,16 @@ const input = fs.readFileSync(INPUT_FILE)
 
 let increases = 0;
 
-for (let idx = 1; idx < input.length; idx++) {
-  if (input[idx] > input[idx - 1]) {
+let previous = 0;
+for (let idx = 2; idx < input.length; idx++) {
+  const sum = input[idx - 2] + input[idx - 1] + input[idx];
+
+  const increased = sum > previous;
+
+  if (increased && !!previous) {
     increases++;
   }
+  previous = sum;
 }
 
 console.log(`There were a total of ${increases} increases`);
