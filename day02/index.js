@@ -16,15 +16,17 @@ const input = fs.readFileSync(INPUT_FILE)
 const position = {
   x: 0,
   y: 0,
+  aim: 0,
 };
 
 for (const { dir, dist } of input) {
   if (dir == 'forward') {
     position.x += dist;
+    position.y -= position.aim * dist;
   } else if (dir == 'up') {
-    position.y -= dist;
+    position.aim += dist;
   } else if (dir == 'down') {
-    position.y += dist;
+    position.aim -= dist;
   }
 }
 
